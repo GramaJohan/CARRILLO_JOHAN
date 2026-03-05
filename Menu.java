@@ -8,18 +8,25 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
 
 
+        Cuenta cuenta = new Cuenta();
+
+        // creamos los objetos de cada operacion
+        CrearCuenta crear = new CrearCuenta();
+        DepositarSaldo depositar = new DepositarSaldo();
+        RetirarSaldo retirar = new RetirarSaldo();
+        VerSaldo ver = new VerSaldo();
+
         System.out.println("Ingrese saldo inicial de la cuenta:");
         double saldoInicial = sc.nextDouble();
 
 
-        Cuenta cuenta = new Cuenta(saldoInicial);
+        crear.crear(cuenta, saldoInicial);
 
         int opcion;
 
-        // ciclo que mantiene el programa ejecutandose hasta que el usuario le de salir y rompemos el ciclo
+        // ciclo que mantiene el programa ejecutandose hasta que el usuario le de salir
         do {
 
-            // menu de opciones
             System.out.println("\n--- MENU BANCO ---");
             System.out.println("1. Depositar dinero");
             System.out.println("2. Retirar dinero");
@@ -34,19 +41,19 @@ public class Menu {
                     // Deposito
                     System.out.println("Ingrese monto a depositar:");
                     double deposito = sc.nextDouble();
-                    cuenta.depositar(deposito);
+                    depositar.depositar(cuenta, deposito);
                     break;
 
                 case 2:
                     // Retiro
                     System.out.println("Ingrese monto a retirar:");
                     double retiro = sc.nextDouble();
-                    cuenta.retirar(retiro);
+                    retirar.retirar(cuenta, retiro);
                     break;
 
                 case 3:
                     // ver saldo
-                    System.out.println("Saldo actual: " + cuenta.verSaldo());
+                    System.out.println("Saldo actual: " + ver.ver(cuenta));
                     break;
 
                 case 4:
@@ -59,7 +66,6 @@ public class Menu {
             }
 
         } while (opcion != 4);
-
 
         sc.close();
     }
